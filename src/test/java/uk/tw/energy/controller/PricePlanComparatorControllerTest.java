@@ -80,7 +80,6 @@ public class PricePlanComparatorControllerTest {
         assertThat(controller.recommendCheapestPricePlans(SMART_METER_ID, null).getBody()).isEqualTo(expectedPricePlanToCost);
     }
 
-
     @Test
     public void shouldRecommendLimitedCheapestPricePlansForMeterUsage() throws Exception {
 
@@ -113,5 +112,10 @@ public class PricePlanComparatorControllerTest {
     @Test
     public void givenNoMatchingMeterIdShouldReturnNotFound() {
         assertThat(controller.calculatedCostForEachPricePlan("not-found").getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    public void givenNoMatchingMeterIdShouldRecommendCheapestPricePlansReturnNotFound() {
+        assertThat(controller.recommendCheapestPricePlans("not-found", 5).getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 }
