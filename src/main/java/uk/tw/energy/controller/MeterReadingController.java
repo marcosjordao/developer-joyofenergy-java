@@ -32,7 +32,7 @@ public class MeterReadingController {
             meterReadingService.storeReadings(meterReadings.getSmartMeterId(), meterReadings.getElectricityReadings());
             return ResponseEntity.ok().build();
         } catch (InvalidMeterReadingsException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
     }
 
