@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uk.tw.energy.domain.ElectricityReading;
 import uk.tw.energy.exception.InvalidMeterReadingsException;
+import uk.tw.energy.service.impl.MeterReadingService;
 
 import java.math.BigDecimal;
 import java.time.Instant;

@@ -1,8 +1,10 @@
-package uk.tw.energy.service;
+package uk.tw.energy.service.impl;
 
 import org.springframework.stereotype.Service;
 import uk.tw.energy.domain.ElectricityReading;
 import uk.tw.energy.domain.PricePlan;
+import uk.tw.energy.service.IMeterReadingService;
+import uk.tw.energy.service.IPricePlanService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,16 +16,18 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PricePlanService {
+public class PricePlanService
+        implements IPricePlanService {
 
     private final List<PricePlan> pricePlans;
-    private final MeterReadingService meterReadingService;
+    private final IMeterReadingService meterReadingService;
 
-    public PricePlanService(List<PricePlan> pricePlans, MeterReadingService meterReadingService) {
+    public PricePlanService(List<PricePlan> pricePlans, IMeterReadingService meterReadingService) {
         this.pricePlans = pricePlans;
         this.meterReadingService = meterReadingService;
     }
 
+    @Override
     public Optional<Map<String, BigDecimal>> getConsumptionCostOfElectricityReadingsForEachPricePlan(String smartMeterId) {
         Optional<List<ElectricityReading>> electricityReadings = meterReadingService.getReadings(smartMeterId);
 

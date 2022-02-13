@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import uk.tw.energy.domain.ElectricityReading;
 import uk.tw.energy.domain.PricePlan;
-import uk.tw.energy.service.AccountService;
-import uk.tw.energy.service.MeterReadingService;
-import uk.tw.energy.service.PricePlanService;
+import uk.tw.energy.service.IAccountService;
+import uk.tw.energy.service.IMeterReadingService;
+import uk.tw.energy.service.IPricePlanService;
+import uk.tw.energy.service.impl.AccountService;
+import uk.tw.energy.service.impl.MeterReadingService;
+import uk.tw.energy.service.impl.PricePlanService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -27,8 +30,8 @@ public class PricePlanComparatorControllerTest {
     private static final String PRICE_PLAN_3_ID = "second-best-supplier";
     private static final String SMART_METER_ID = "smart-meter-id";
     private PricePlanComparatorController controller;
-    private MeterReadingService meterReadingService;
-    private AccountService accountService;
+    private IMeterReadingService meterReadingService;
+    private IAccountService accountService;
 
     @BeforeEach
     public void setUp() {
@@ -38,7 +41,7 @@ public class PricePlanComparatorControllerTest {
         PricePlan pricePlan3 = new PricePlan(PRICE_PLAN_3_ID, null, BigDecimal.valueOf(2), null);
 
         List<PricePlan> pricePlans = Arrays.asList(pricePlan1, pricePlan2, pricePlan3);
-        PricePlanService tariffService = new PricePlanService(pricePlans, meterReadingService);
+        IPricePlanService tariffService = new PricePlanService(pricePlans, meterReadingService);
 
         Map<String, String> meterToTariffs = new HashMap<>();
         meterToTariffs.put(SMART_METER_ID, PRICE_PLAN_1_ID);

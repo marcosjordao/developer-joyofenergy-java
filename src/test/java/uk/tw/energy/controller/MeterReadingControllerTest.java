@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 import uk.tw.energy.builders.MeterReadingsBuilder;
 import uk.tw.energy.domain.ElectricityReading;
 import uk.tw.energy.domain.MeterReadings;
-import uk.tw.energy.service.MeterReadingService;
+import uk.tw.energy.service.IMeterReadingService;
+import uk.tw.energy.service.impl.MeterReadingService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class MeterReadingControllerTest {
 
     private static final String SMART_METER_ID = "10101010";
     private MeterReadingController meterReadingController;
-    private MeterReadingService meterReadingService;
+    private IMeterReadingService meterReadingService;
 
     @BeforeEach
     public void setUp() {

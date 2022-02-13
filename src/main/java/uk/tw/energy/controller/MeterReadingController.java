@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.tw.energy.domain.ElectricityReading;
 import uk.tw.energy.domain.MeterReadings;
 import uk.tw.energy.exception.InvalidMeterReadingsException;
-import uk.tw.energy.service.MeterReadingService;
+import uk.tw.energy.service.IMeterReadingService;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,9 +20,9 @@ import java.util.Optional;
 @RequestMapping("/readings")
 public class MeterReadingController {
 
-    private final MeterReadingService meterReadingService;
+    private final IMeterReadingService meterReadingService;
 
-    public MeterReadingController(MeterReadingService meterReadingService) {
+    public MeterReadingController(IMeterReadingService meterReadingService) {
         this.meterReadingService = meterReadingService;
     }
 
