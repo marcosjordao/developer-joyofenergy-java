@@ -2,6 +2,7 @@ package uk.tw.energy.service;
 
 import org.springframework.stereotype.Service;
 import uk.tw.energy.domain.ElectricityReading;
+import uk.tw.energy.exception.InvalidMeterReadingsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +22,25 @@ public class MeterReadingService {
         return Optional.ofNullable(meterAssociatedReadings.get(smartMeterId));
     }
 
-    public void storeReadings(String smartMeterId, List<ElectricityReading> electricityReadings) {
+    public void storeReadings(String smartMeterId, List<ElectricityReading> electricityReadings)
+            throws InvalidMeterReadingsException {
+        validateReadings(smartMeterId, electricityReadings);
+
         if (!meterAssociatedReadings.containsKey(smartMeterId)) {
             meterAssociatedReadings.put(smartMeterId, new ArrayList<>());
         }
         meterAssociatedReadings.get(smartMeterId).addAll(electricityReadings);
     }
+
+    private void validateReadings(String smartMeterId, List<ElectricityReading> electricityReadings)
+            throws InvalidMeterReadingsException {
+        if (smartMeterId == null || smartMeterId.isEmpty()) {
+            throw new InvalidMeterReadingsException();
+        }
+
+        if (electricityReadings == null || electricityReadings.isEmpty()) {
+            throw new InvalidMeterReadingsException();
+        }
+    }
+
 }
