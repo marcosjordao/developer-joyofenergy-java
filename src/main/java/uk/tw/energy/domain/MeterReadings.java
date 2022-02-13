@@ -4,10 +4,8 @@ import java.util.List;
 
 public class MeterReadings {
 
-    private List<ElectricityReading> electricityReadings;
-    private String smartMeterId;
-
-    public MeterReadings() { }
+    private final List<ElectricityReading> electricityReadings;
+    private final String smartMeterId;
 
     public MeterReadings(String smartMeterId, List<ElectricityReading> electricityReadings) {
         this.smartMeterId = smartMeterId;
